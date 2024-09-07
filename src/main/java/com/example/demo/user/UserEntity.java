@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,12 +14,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class product {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long productId;
-    private String productName;
-    private String productDesc;
-    private double productPrice;
+    private Long userId;
+    private String userName;
+    private String email;
+    private String password;
 }
