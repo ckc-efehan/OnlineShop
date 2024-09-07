@@ -25,4 +25,18 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ein unerwarteter Fehler ist aufgetreten.");
         }
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> loginUser(@RequestBody UserEntity user) {
+        try {
+            boolean isAuthenticated = userService.authenticate(user.getUserName(), user.getPassword());
+            if (isAuthenticated) {
+                return ResponseEntity.ok("Login erfolgreich.");
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Benutzername oder Passwort falsch. Versuchen Sie es noch einmal.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ein Fehler ist aufgetreten.");
+        }
+    }
 }
