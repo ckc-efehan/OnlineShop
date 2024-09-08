@@ -1,6 +1,6 @@
 package com.example.demo.user;
 
-import com.example.demo.config.JwtTokenUtil;
+import com.example.demo.jwt.JwtTokenUtil;
 import com.example.demo.exceptions.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

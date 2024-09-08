@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
