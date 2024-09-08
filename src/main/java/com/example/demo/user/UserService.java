@@ -21,7 +21,7 @@ public class UserService {
 
     public String saveAndGenerateToken(UserEntity user) throws Exception {
         if (userRepository.findByUserName(user.getUserName()).isPresent() || userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new UserAlreadyExistsException("User existiert bereits.");
+            throw new UserAlreadyExistsException("Benutzernamen oder Email bereits vergeben.");
         }
 
         // Passwort verschlüsseln und Benutzer speichern
