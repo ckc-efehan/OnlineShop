@@ -1,5 +1,6 @@
 package com.example.demo.user;
 
+import com.example.demo.config.JwtTokenUtil;
 import com.example.demo.exceptions.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,29 +16,34 @@ public class UserService {
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
 
-    public UserEntity save(UserEntity user) throws Exception {
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
 
-        if (userRepository.findByUserName(user.getUserName()).isPresent() || userRepository.findByEmail(user.getEmail()).isPresent()){
+    public String saveAndGenerateToken(UserEntity user) throws Exception {
+        if (userRepository.findByUserName(user.getUserName()).isPresent() || userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new UserAlreadyExistsException("User existiert bereits.");
         }
 
+        // Passwort verschlüsseln und Benutzer speichern
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        userRepository.save(user);
+
+        // JWT-Token für den Benutzer generieren und zurückgeben
+        return jwtTokenUtil.generateToken(user.getUserName());
     }
 
+
     // Authentifizierungsmethode
-    public boolean authenticate(String username, String password) {
-        // Finde den Benutzer nach Benutzername
+    public String authenticateAndGenerateToken(String username, String password) {
         Optional<UserEntity> optionalUser = userRepository.findByUserName(username);
 
-        // Überprüfe, ob der Benutzer existiert und das Passwort korrekt ist
         if (optionalUser.isPresent()) {
             UserEntity user = optionalUser.get();
-            // Passwortvergleich: Verschlüsseltes Passwort gegen das eingegebene
-            return passwordEncoder.matches(password, user.getPassword());
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                // Erzeuge und gebe das JWT-Token zurück
+                return jwtTokenUtil.generateToken(user.getUserName());
+            }
         }
-
-        // Rückgabe "false", wenn der Benutzer nicht existiert oder das Passwort falsch ist
-        return false;
+        return null;
     }
 }
