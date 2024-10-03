@@ -1,7 +1,6 @@
 package com.example.demo.auth;
 
 import com.example.demo.config.JwtService;
-import com.example.demo.mail.EmailService;
 import com.example.demo.user.Role;
 import com.example.demo.user.User;
 import com.example.demo.user.UserRepository;
@@ -19,7 +18,6 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    private final EmailService emailService;
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
