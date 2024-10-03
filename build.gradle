@@ -34,13 +34,8 @@ dependencies {
 
 	// JWT Dependencies
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
-	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
-
-	// Google API Client Libraries for OAuth
-	implementation 'com.google.api-client:google-api-client:1.33.0'
-	implementation 'com.google.oauth-client:google-oauth-client:1.33.3'
-	implementation 'com.google.http-client:google-http-client-gson:1.42.2'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
 	// Email Service (SendGrid)
 	implementation 'com.sendgrid:sendgrid-java:4.9.2'
