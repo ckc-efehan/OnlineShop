@@ -20,5 +20,5 @@ public class ProductEntity {
     private Long productId;
     private String productName;
     private String productDescription;
-    private int productPrice;
+    private double productPrice;
 }
