@@ -49,7 +49,7 @@ public class SecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Collections.singletonList("http://localhost:*")); // Erlaubt alle Ports auf localhost
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:*", "https://loginmanager-frontend.netlify.app")); // Allow localhost and Netlify frontend
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept", "*"));
         configuration.setAllowCredentials(true);
